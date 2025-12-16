@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: 255 255 255;
+    --color-bg-secondary: 249 250 251;
+    --color-text-primary: 17 24 39;
+    --color-text-secondary: 107 114 128;
+  }
+
+  .dark {
+    --color-bg-primary: 17 24 39;
+    --color-bg-secondary: 31 41 55;
+    --color-text-primary: 249 250 251;
+    --color-text-secondary: 156 163 175;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+}
+
+@layer components {
+  /* Glass morphism cards */
+  .glass-card {
+    @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-2xl shadow-xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:border-primary-400/50;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-500 via-primary-600 to-accent-600;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 
+           text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 
+           transform transition-all duration-300 hover:scale-105 hover:shadow-xl 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700
+           text-gray-700 dark:text-gray-200 font-semibold rounded-xl
+           transform transition-all duration-300 hover:border-primary-400 hover:text-primary-600 
+           dark:hover:border-primary-500 dark:hover:text-primary-400
+           hover:scale-105 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400
+           hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200;
+  }
+
+  .btn-icon {
+    @apply p-3 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700
+           hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600
+           transition-all duration-200 hover:scale-110 active:scale-95;
+  }
+
+  /* Inputs */
+  .input-field {
+    @apply w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600
+           rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+           transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500;
+  }
+
+  .input-search {
+    @apply input-field pl-12 bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  /* Cards for anatomy items */
+  .anatomy-card {
+    @apply glass-card-hover p-6 cursor-pointer;
+  }
+
+  /* System color badges */
+  .system-badge {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium;
+  }
+
+  /* Navbar */
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg 
+           border-b border-gray-200/50 dark:border-gray-700/50;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-gray-900 
+           border-r border-gray-200 dark:border-gray-800 overflow-y-auto;
+  }
+
+  /* Model viewer container */
+  .model-viewer-container {
+    @apply w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 
+           dark:from-gray-800 dark:to-gray-900 shadow-inner;
+  }
+
+  /* Info cards that appear when clicking on organs */
+  .info-card {
+    @apply glass-card p-6 max-w-md animate-scale-in;
+  }
+
+  /* Quiz option cards */
+  .quiz-option {
+    @apply p-4 border-2 border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer
+           transition-all duration-200 hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20;
+  }
+
+  .quiz-option.selected {
+    @apply border-primary-500 bg-primary-50 dark:bg-primary-900/30;
+  }
+
+  .quiz-option.correct {
+    @apply border-green-500 bg-green-50 dark:bg-green-900/30;
+  }
+
+  .quiz-option.incorrect {
+    @apply border-red-500 bg-red-50 dark:bg-red-900/30;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-500;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply bg-gray-200 dark:bg-gray-700 animate-pulse rounded-lg;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm;
+  }
+
+  /* Tooltips */
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm bg-gray-900 dark:bg-gray-100 
+           text-white dark:text-gray-900 rounded-lg shadow-lg
+           opacity-0 invisible transition-all duration-200 pointer-events-none;
+  }
+
+  .tooltip-parent:hover .tooltip {
+    @apply opacity-100 visible;
+  }
+
+  /* Layer control panel */
+  .layer-panel {
+    @apply glass-card p-4 max-h-96 overflow-y-auto;
+  }
+
+  .layer-item {
+    @apply flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50
+           transition-colors cursor-pointer;
+  }
+
+  /* AR button */
+  .ar-button {
+    @apply btn-primary flex items-center gap-2;
+    background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 100%);
+  }
+
+  /* Floating action button */
+  .fab {
+    @apply fixed bottom-6 right-6 p-4 rounded-full gradient-bg shadow-lg shadow-primary-500/40
+           hover:shadow-xl hover:scale-110 transition-all duration-300 z-40;
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(156 163 175) transparent;
+  }
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px rgba(217, 70, 239, 0.3);
+  }
+}
+
+/* Model viewer custom styles */
+model-viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+model-viewer::part(default-ar-button) {
+  display: none;
+}
+
+/* Custom hotspot styles */
+.hotspot {
+  @apply w-8 h-8 bg-primary-500 rounded-full border-4 border-white shadow-lg cursor-pointer
+         flex items-center justify-center text-white font-bold
+         hover:scale-125 transition-transform duration-200;
+}
+
+.hotspot-annotation {
+  @apply glass-card p-3 text-sm max-w-xs;
+}
+
+/* Voice command indicator */
+.voice-indicator {
+  @apply fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 glass-card flex items-center gap-3
+         animate-pulse;
+}
+
+.voice-indicator.listening {
+  @apply border-2 border-red-500 shadow-red-500/30;
+}
+
+/* Quiz drag and drop */
+.drag-item {
+  @apply px-4 py-2 bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 
+         dark:border-gray-600 cursor-grab active:cursor-grabbing
+         hover:border-primary-400 transition-colors;
+}
+
+.drop-zone {
+  @apply min-h-16 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg
+         flex items-center justify-center text-gray-400
+         transition-colors;
+}
+
+.drop-zone.active {
+  @apply border-primary-500 bg-primary-50 dark:bg-primary-900/20;
+}
+
+/* Dashboard stat cards */
+.stat-card {
+  @apply glass-card p-6 flex flex-col gap-2;
+}
+
+.stat-card .stat-value {
+  @apply text-3xl font-bold gradient-text;
+}
+
+.stat-card .stat-label {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 300ms ease-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 300ms ease-in;
+}
