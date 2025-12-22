@@ -35,7 +35,7 @@ const Navbar = () => {
                                 onClick={() => dispatch(toggleSidebar())}
                                 className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                             >
-                                <FiMenu className="w-6 h-6" />
+                                <FiMenu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                             </button>
 
                             <Link to="/" className="flex items-center gap-3">
@@ -54,11 +54,11 @@ const Navbar = () => {
                         <div className="hidden md:flex flex-1 max-w-xl mx-8">
                             <button
                                 onClick={() => setShowSearch(true)}
-                                className="w-full flex items-center gap-3 px-4 py-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                                className="w-full flex items-center gap-3 px-4 py-2.5 bg-gray-100 dark:bg-[#1a1a24] rounded-xl text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors border border-transparent dark:border-gray-800"
                             >
                                 <FiSearch className="w-5 h-5" />
                                 <span>Search anatomy, organs, systems...</span>
-                                <kbd className="ml-auto hidden lg:inline-flex items-center gap-1 px-2 py-0.5 bg-white dark:bg-gray-700 rounded text-xs text-gray-500 border border-gray-200 dark:border-gray-600">
+                                <kbd className="ml-auto hidden lg:inline-flex items-center gap-1 px-2 py-0.5 bg-white dark:bg-gray-800 rounded text-xs text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
                                     ⌘K
                                 </kbd>
                             </button>
@@ -71,7 +71,7 @@ const Navbar = () => {
                                 onClick={() => setShowSearch(true)}
                                 className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                             >
-                                <FiSearch className="w-5 h-5" />
+                                <FiSearch className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                             </button>
 
                             {/* Theme toggle */}
@@ -82,7 +82,7 @@ const Navbar = () => {
                                 {theme === 'dark' ? (
                                     <FiSun className="w-5 h-5 text-yellow-500" />
                                 ) : (
-                                    <FiMoon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                                    <FiMoon className="w-5 h-5 text-gray-600" />
                                 )}
                             </button>
 
@@ -90,7 +90,7 @@ const Navbar = () => {
                                 <>
                                     {/* Notifications */}
                                     <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative">
-                                        <FiBell className="w-5 h-5" />
+                                        <FiBell className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                                         <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
                                     </button>
 
@@ -118,13 +118,13 @@ const Navbar = () => {
                                                         <p className="font-medium text-gray-900 dark:text-white">
                                                             {user?.firstName} {user?.lastName}
                                                         </p>
-                                                        <p className="text-sm text-gray-500">{user?.email}</p>
+                                                        <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email}</p>
                                                     </div>
 
                                                     <Link
                                                         to="/dashboard"
                                                         onClick={() => setShowUserMenu(false)}
-                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                                     >
                                                         <FiUser className="w-4 h-4" />
                                                         <span>Dashboard</span>
@@ -132,7 +132,7 @@ const Navbar = () => {
                                                     <Link
                                                         to="/bookmarks"
                                                         onClick={() => setShowUserMenu(false)}
-                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                                     >
                                                         <FiBookmark className="w-4 h-4" />
                                                         <span>Bookmarks</span>
@@ -140,7 +140,7 @@ const Navbar = () => {
                                                     <Link
                                                         to="/notes"
                                                         onClick={() => setShowUserMenu(false)}
-                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                                     >
                                                         <FiEdit3 className="w-4 h-4" />
                                                         <span>Notes</span>
@@ -148,7 +148,7 @@ const Navbar = () => {
                                                     <Link
                                                         to="/settings"
                                                         onClick={() => setShowUserMenu(false)}
-                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                                        className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                                     >
                                                         <FiSettings className="w-4 h-4" />
                                                         <span>Settings</span>
@@ -158,7 +158,7 @@ const Navbar = () => {
                                                         <Link
                                                             to="/admin"
                                                             onClick={() => setShowUserMenu(false)}
-                                                            className="flex items-center gap-3 px-3 py-2 rounded-lg text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                                                            className="flex items-center gap-3 px-3 py-2 rounded-lg text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
                                                         >
                                                             <FiSettings className="w-4 h-4" />
                                                             <span>Admin Panel</span>

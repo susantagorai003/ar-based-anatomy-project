@@ -11,7 +11,7 @@ const AuthLayout = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-primary-900 to-accent-900 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-gray-100 via-primary-50 to-accent-50 dark:from-[#0a0a0f] dark:via-[#0d0d12] dark:to-[#0a0a0f] flex items-center justify-center p-4">
             {/* Background decorations */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl" />

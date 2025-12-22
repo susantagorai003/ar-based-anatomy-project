@@ -58,7 +58,7 @@ const Home = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
+                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6 border border-primary-200 dark:border-primary-800">
                                 <FiZap className="w-4 h-4" />
                                 Next-Gen Medical Education
                             </span>
@@ -108,7 +108,7 @@ const Home = () => {
                         transition={{ duration: 0.7, delay: 0.4 }}
                         className="mt-16 relative max-w-4xl mx-auto"
                     >
-                        <div className="aspect-video rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700">
+                        <div className="aspect-video rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-[#0a0a0f] dark:to-[#1a1a24] overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
                             <iframe
                                 title="Animated Full Human Body Anatomy"
                                 className="w-full h-full"
@@ -127,11 +127,11 @@ const Home = () => {
                             className="absolute -left-4 top-1/4 glass-card p-3 hidden lg:flex items-center gap-3"
                         >
                             <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
-                                <FiAward className="w-5 h-5 text-green-500" />
+                                <FiAward className="w-5 h-5 text-green-600 dark:text-green-400" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-900 dark:text-white">12+ Systems</p>
-                                <p className="text-sm text-gray-500">Complete Coverage</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Complete Coverage</p>
                             </div>
                         </motion.div>
 
@@ -142,11 +142,11 @@ const Home = () => {
                             className="absolute -right-4 bottom-1/4 glass-card p-3 hidden lg:flex items-center gap-3"
                         >
                             <div className="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
-                                <FiSmartphone className="w-5 h-5 text-primary-500" />
+                                <FiSmartphone className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-900 dark:text-white">AR Ready</p>
-                                <p className="text-sm text-gray-500">Mobile Compatible</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Mobile Compatible</p>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -154,7 +154,7 @@ const Home = () => {
             </section>
 
             {/* Features Section */}
-            <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
+            <section className="py-20 bg-gray-50 dark:bg-gray-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">
@@ -216,10 +216,10 @@ const Home = () => {
                                     className="block glass-card-hover p-4 text-center group"
                                 >
                                     <div className="text-4xl mb-3">{system.icon}</div>
-                                    <h3 className="font-medium text-gray-900 dark:text-white text-sm group-hover:text-primary-500 transition-colors">
+                                    <h3 className="font-medium text-gray-900 dark:text-white text-sm group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                         {system.name.split(' ')[0]}
                                     </h3>
-                                    <p className="text-xs text-gray-500 mt-1">{system.count} items</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{system.count} items</p>
                                 </Link>
                             </motion.div>
                         ))}

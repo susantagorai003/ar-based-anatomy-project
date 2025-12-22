@@ -6,15 +6,19 @@
   :root {
     --color-bg-primary: 255 255 255;
     --color-bg-secondary: 249 250 251;
+    --color-bg-card: 255 255 255;
     --color-text-primary: 17 24 39;
     --color-text-secondary: 107 114 128;
+    --color-border: 229 231 235;
   }
 
   .dark {
-    --color-bg-primary: 17 24 39;
-    --color-bg-secondary: 31 41 55;
-    --color-text-primary: 249 250 251;
+    --color-bg-primary: 10 10 15;
+    --color-bg-secondary: 17 17 23;
+    --color-bg-card: 26 26 36;
+    --color-text-primary: 255 255 255;
     --color-text-secondary: 156 163 175;
+    --color-border: 55 55 75;
   }
 
   html {
@@ -22,23 +26,24 @@
   }
 
   body {
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased;
+    @apply bg-gray-50 dark:bg-[#0a0a0f] text-gray-900 dark:text-gray-100 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
   * {
-    @apply border-gray-200 dark:border-gray-700;
+    @apply border-gray-200 dark:border-gray-800;
   }
 }
 
 @layer components {
-  /* Glass morphism cards */
+
+  /* Modern glass cards with proper theme support */
   .glass-card {
-    @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-2xl shadow-xl;
+    @apply bg-white/90 dark:bg-[#1a1a24]/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg dark:shadow-2xl dark:shadow-primary-900/10;
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:border-primary-400/50;
+    @apply glass-card transition-all duration-300 hover:shadow-xl dark:hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-primary-300/50 dark:hover:border-primary-500/50;
   }
 
   /* Gradient backgrounds */
@@ -47,45 +52,33 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 bg-clip-text text-transparent;
   }
 
-  /* Buttons */
+  /* Premium Buttons with vibrant gradients */
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 
-           text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 
-           transform transition-all duration-300 hover:scale-105 hover:shadow-xl 
-           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+    @apply px-6 py-3 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 hover:from-violet-400 hover:via-purple-400 hover:to-fuchsia-400 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/30 dark:shadow-purple-500/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/40 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700
-           text-gray-700 dark:text-gray-200 font-semibold rounded-xl
-           transform transition-all duration-300 hover:border-primary-400 hover:text-primary-600 
-           dark:hover:border-primary-500 dark:hover:text-primary-400
-           hover:scale-105 active:scale-95;
+    @apply px-6 py-3 bg-white dark:bg-[#1a1a24] border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl transform transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 hover:shadow-lg hover:shadow-purple-500/10 hover:scale-105 active:scale-95;
   }
 
   .btn-ghost {
-    @apply px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400
-           hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200;
+    @apply px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-all duration-200;
   }
 
   .btn-icon {
-    @apply p-3 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700
-           hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600
-           transition-all duration-200 hover:scale-110 active:scale-95;
+    @apply p-3 rounded-xl bg-white/80 dark:bg-[#1a1a24]/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 hover:border-purple-300 dark:hover:border-purple-600 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-200 hover:scale-110 active:scale-95;
   }
 
-  /* Inputs */
+  /* Inputs with proper theming */
   .input-field {
-    @apply w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600
-           rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-           transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500;
+    @apply w-full px-4 py-3 bg-white dark:bg-[#1a1a24] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500;
   }
 
   .input-search {
-    @apply input-field pl-12 bg-gray-50 dark:bg-gray-800/50;
+    @apply input-field pl-12 bg-gray-50 dark:bg-[#111117];
   }
 
   /* Cards for anatomy items */
@@ -98,22 +91,19 @@
     @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium;
   }
 
-  /* Navbar */
+  /* Navbar with proper theme */
   .navbar {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg 
-           border-b border-gray-200/50 dark:border-gray-700/50;
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0a0a0f]/95 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-800;
   }
 
   /* Sidebar */
   .sidebar {
-    @apply fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-gray-900 
-           border-r border-gray-200 dark:border-gray-800 overflow-y-auto;
+    @apply fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-[#0a0a0f] border-r border-gray-200 dark:border-gray-800 overflow-y-auto;
   }
 
   /* Model viewer container */
   .model-viewer-container {
-    @apply w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 
-           dark:from-gray-800 dark:to-gray-900 shadow-inner;
+    @apply w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-[#0a0a0f] dark:to-[#1a1a24] shadow-inner;
   }
 
   /* Info cards that appear when clicking on organs */
@@ -123,8 +113,7 @@
 
   /* Quiz option cards */
   .quiz-option {
-    @apply p-4 border-2 border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer
-           transition-all duration-200 hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20;
+    @apply p-4 border-2 border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer transition-all duration-200 hover:border-primary-400 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20;
   }
 
   .quiz-option.selected {
@@ -141,7 +130,7 @@
 
   /* Progress bar */
   .progress-bar {
-    @apply h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+    @apply h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden;
   }
 
   .progress-bar-fill {
@@ -150,7 +139,7 @@
 
   /* Skeleton loading */
   .skeleton {
-    @apply bg-gray-200 dark:bg-gray-700 animate-pulse rounded-lg;
+    @apply bg-gray-200 dark:bg-gray-800 animate-pulse rounded-lg;
   }
 
   /* Modal overlay */
@@ -160,9 +149,7 @@
 
   /* Tooltips */
   .tooltip {
-    @apply absolute z-50 px-3 py-2 text-sm bg-gray-900 dark:bg-gray-100 
-           text-white dark:text-gray-900 rounded-lg shadow-lg
-           opacity-0 invisible transition-all duration-200 pointer-events-none;
+    @apply absolute z-50 px-3 py-2 text-sm bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg shadow-lg opacity-0 invisible transition-all duration-200 pointer-events-none;
   }
 
   .tooltip-parent:hover .tooltip {
@@ -175,24 +162,29 @@
   }
 
   .layer-item {
-    @apply flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50
-           transition-colors cursor-pointer;
+    @apply flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors cursor-pointer;
   }
 
-  /* AR button */
+  /* AR button - vibrant gradient */
   .ar-button {
     @apply btn-primary flex items-center gap-2;
-    background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  }
+
+  .ar-button:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #f472b6 100%);
+    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
   }
 
   /* Floating action button */
   .fab {
-    @apply fixed bottom-6 right-6 p-4 rounded-full gradient-bg shadow-lg shadow-primary-500/40
-           hover:shadow-xl hover:scale-110 transition-all duration-300 z-40;
+    @apply fixed bottom-6 right-6 p-4 rounded-full gradient-bg shadow-lg shadow-primary-500/40 hover:shadow-xl hover:scale-110 transition-all duration-300 z-40;
   }
 }
 
 @layer utilities {
+
   /* Text utilities */
   .text-balance {
     text-wrap: balance;
@@ -203,6 +195,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -212,19 +205,22 @@
     scrollbar-width: thin;
     scrollbar-color: rgb(156 163 175) transparent;
   }
+
   .scrollbar-custom::-webkit-scrollbar {
     width: 6px;
   }
+
   .scrollbar-custom::-webkit-scrollbar-track {
     background: transparent;
   }
+
   .scrollbar-custom::-webkit-scrollbar-thumb {
     @apply bg-gray-300 dark:bg-gray-600 rounded-full;
   }
 
-  /* Glow effects */
+  /* Glow effects with purple */
   .glow-primary {
-    box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
   }
 
   .glow-accent {
@@ -245,9 +241,7 @@ model-viewer::part(default-ar-button) {
 
 /* Custom hotspot styles */
 .hotspot {
-  @apply w-8 h-8 bg-primary-500 rounded-full border-4 border-white shadow-lg cursor-pointer
-         flex items-center justify-center text-white font-bold
-         hover:scale-125 transition-transform duration-200;
+  @apply w-8 h-8 bg-primary-500 rounded-full border-4 border-white shadow-lg cursor-pointer flex items-center justify-center text-white font-bold hover:scale-125 transition-transform duration-200;
 }
 
 .hotspot-annotation {
@@ -256,8 +250,7 @@ model-viewer::part(default-ar-button) {
 
 /* Voice command indicator */
 .voice-indicator {
-  @apply fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 glass-card flex items-center gap-3
-         animate-pulse;
+  @apply fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 glass-card flex items-center gap-3 animate-pulse;
 }
 
 .voice-indicator.listening {
@@ -266,15 +259,11 @@ model-viewer::part(default-ar-button) {
 
 /* Quiz drag and drop */
 .drag-item {
-  @apply px-4 py-2 bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 
-         dark:border-gray-600 cursor-grab active:cursor-grabbing
-         hover:border-primary-400 transition-colors;
+  @apply px-4 py-2 bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 cursor-grab active:cursor-grabbing hover:border-primary-400 transition-colors;
 }
 
 .drop-zone {
-  @apply min-h-16 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg
-         flex items-center justify-center text-gray-400
-         transition-colors;
+  @apply min-h-16 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center text-gray-400 transition-colors;
 }
 
 .drop-zone.active {

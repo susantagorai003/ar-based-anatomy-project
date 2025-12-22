@@ -9,17 +9,17 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7',
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
-                    950: '#082f49',
+                    50: '#faf5ff',
+                    100: '#f3e8ff',
+                    200: '#e9d5ff',
+                    300: '#d8b4fe',
+                    400: '#c084fc',
+                    500: '#a855f7',
+                    600: '#9333ea',
+                    700: '#7c3aed',
+                    800: '#6d28d9',
+                    900: '#5b21b6',
+                    950: '#3b0764',
                 },
                 accent: {
                     50: '#fdf4ff',
@@ -82,17 +82,17 @@ export default {
                     '100%': { transform: 'scale(1)', opacity: '1' },
                 },
                 glow: {
-                    '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' },
-                    '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.6)' },
+                    '0%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' },
+                    '100%': { boxShadow: '0 0 40px rgba(168, 85, 247, 0.6)' },
                 }
             },
             backdropBlur: {
                 xs: '2px',
             },
             boxShadow: {
-                'glow': '0 0 40px rgba(14, 165, 233, 0.3)',
-                'glow-lg': '0 0 60px rgba(14, 165, 233, 0.4)',
-                'inner-glow': 'inset 0 0 20px rgba(14, 165, 233, 0.2)',
+                'glow': '0 0 40px rgba(168, 85, 247, 0.3)',
+                'glow-lg': '0 0 60px rgba(168, 85, 247, 0.4)',
+                'inner-glow': 'inset 0 0 20px rgba(168, 85, 247, 0.2)',
             }
         },
     },
