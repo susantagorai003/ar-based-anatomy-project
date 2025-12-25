@@ -1,15 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import {
     FiClock, FiBook, FiHelpCircle, FiBox, FiBookmark,
-    FiTrendingUp, FiAward, FiEye, FiArrowRight
+    FiTrendingUp, FiAward, FiEye, FiArrowRight, FiRefreshCw
 } from 'react-icons/fi';
-import { selectCurrentUser } from '../../store/slices/authSlice';
+import { selectCurrentUser, fetchCurrentUser } from '../../store/slices/authSlice';
+import { activityAPI } from '../../services/api';
 
 const Dashboard = () => {
+    const dispatch = useDispatch();
     const user = useSelector(selectCurrentUser);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [activityStats, setActivityStats] = useState(null);
+
+    // Fetch activity stats on mount (user data is already fetched by App.jsx)
+    useEffect(() => {
+        fetchActivityStats();
+    }, []);
+
+    const fetchActivityStats = async () => {
+        try {
+            const response = await activityAPI.getStats({ period: '30d' });
+            if (response.data?.success) {
+                setActivityStats(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch activity stats:', error);
+        }
+    };
+
+    const refreshData = async () => {
+        setIsRefreshing(true);
+        try {
+            await fetchActivityStats();
+        } finally {
+            setIsRefreshing(false);
+        }
+    };
 
     const stats = [
         {
@@ -55,17 +84,27 @@ const Dashboard = () => {
         <div className="min-h-screen p-4 lg:p-8">
             <div className="max-w-7xl mx-auto">
                 {/* Welcome header */}
-                <div className="mb-8">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-3xl font-display font-bold text-gray-900 dark:text-white"
+                <div className="mb-8 flex items-center justify-between">
+                    <div>
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-3xl font-display font-bold text-gray-900 dark:text-white"
+                        >
+                            Welcome back, {user?.firstName}! 👋
+                        </motion.h1>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">
+                            Here's your learning progress
+                        </p>
+                    </div>
+                    <button
+                        onClick={refreshData}
+                        disabled={isRefreshing}
+                        className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors disabled:opacity-50"
                     >
-                        Welcome back, {user?.firstName}! 👋
-                    </motion.h1>
-                    <p className="text-gray-600 dark:text-gray-400 mt-1">
-                        Here's your learning progress
-                    </p>
+                        <FiRefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                        {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                    </button>
                 </div>
 
                 {/* Stats grid */}

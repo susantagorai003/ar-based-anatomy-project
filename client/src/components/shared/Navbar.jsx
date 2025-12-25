@@ -3,12 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    FiSearch, FiMenu, FiMoon, FiSun, FiBell, FiLogOut,
+    FiSearch, FiMenu, FiMoon, FiSun, FiLogOut,
     FiUser, FiSettings, FiBookmark, FiEdit3
 } from 'react-icons/fi';
 import { selectCurrentUser, selectIsAuthenticated, logout } from '../../store/slices/authSlice';
 import { selectTheme, toggleTheme, toggleSidebar, openModal } from '../../store/slices/uiSlice';
 import SearchModal from '../modals/SearchModal';
+import NotificationDropdown from './NotificationDropdown';
 
 const Navbar = () => {
     const [showUserMenu, setShowUserMenu] = useState(false);
@@ -89,10 +90,7 @@ const Navbar = () => {
                             {isAuthenticated ? (
                                 <>
                                     {/* Notifications */}
-                                    <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative">
-                                        <FiBell className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                                        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-                                    </button>
+                                    <NotificationDropdown />
 
                                     {/* User menu */}
                                     <div className="relative">

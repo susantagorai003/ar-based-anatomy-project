@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiEdit3, FiPlus, FiSearch, FiTrash2, FiX, FiSave, FiTag } from 'react-icons/fi';
+import { FiEdit3, FiPlus, FiSearch, FiTrash2, FiX, FiSave, FiTag, FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 import { notesAPI } from '../../services/api';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import toast from 'react-hot-toast';
@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 const Notes = () => {
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedNote, setSelectedNote] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -21,9 +22,11 @@ const Notes = () => {
     const fetchNotes = async () => {
         try {
             setIsLoading(true);
+            setError(null);
             const response = await notesAPI.getNotes();
-            setNotes(response.data.data);
+            setNotes(response.data.data || []);
         } catch (err) {
+            setError('Failed to load notes. Please try again.');
             toast.error('Failed to load notes');
         } finally {
             setIsLoading(false);
@@ -73,14 +76,34 @@ const Notes = () => {
     };
 
     const filteredNotes = notes.filter(note =>
-        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        note.content.toLowerCase().includes(searchQuery.toLowerCase())
+        note.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.content?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <LoadingSpinner size="lg" />
+            </div>
+        );
+    }
+
+    if (error && notes.length === 0) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <FiAlertCircle className="w-16 h-16 mx-auto text-red-500 mb-4" />
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                        {error}
+                    </h3>
+                    <button
+                        onClick={fetchNotes}
+                        className="btn-primary mt-4 flex items-center gap-2 mx-auto"
+                    >
+                        <FiRefreshCw className="w-4 h-4" />
+                        Try Again
+                    </button>
+                </div>
             </div>
         );
     }
@@ -132,8 +155,8 @@ const Notes = () => {
                                         setIsEditing(false);
                                     }}
                                     className={`w-full text-left p-3 rounded-xl transition-colors ${selectedNote?._id === note._id
-                                            ? 'bg-primary-100 dark:bg-primary-900/30'
-                                            : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                                        ? 'bg-primary-100 dark:bg-primary-900/30'
+                                        : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                                         }`}
                                 >
                                     <h3 className="font-medium text-gray-900 dark:text-white truncate">

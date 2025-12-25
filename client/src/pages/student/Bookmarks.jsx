@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { FiBookmark, FiBox, FiTrash2, FiFolder, FiSearch, FiGrid, FiList } from 'react-icons/fi';
+import { FiBookmark, FiBox, FiTrash2, FiFolder, FiSearch, FiGrid, FiList, FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 import { fetchBookmarks, selectBookmarks, selectAnatomyLoading } from '../../store/slices/anatomySlice';
 import { bookmarkAPI } from '../../services/api';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
@@ -15,9 +15,24 @@ const Bookmarks = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [viewMode, setViewMode] = useState('grid');
     const [selectedFolder, setSelectedFolder] = useState('all');
+    const [error, setError] = useState(null);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    const loadBookmarks = async () => {
+        try {
+            setError(null);
+            setIsRefreshing(true);
+            await dispatch(fetchBookmarks()).unwrap();
+        } catch (err) {
+            setError('Failed to load bookmarks. Please try again.');
+            toast.error('Failed to load bookmarks');
+        } finally {
+            setIsRefreshing(false);
+        }
+    };
 
     useEffect(() => {
-        dispatch(fetchBookmarks());
+        loadBookmarks();
     }, [dispatch]);
 
     const handleDelete = async (id) => {
@@ -34,16 +49,36 @@ const Bookmarks = () => {
 
     const filteredBookmarks = bookmarks.filter(bookmark => {
         const matchesSearch =
-            bookmark.anatomyModel?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            bookmark.organ?.name.toLowerCase().includes(searchQuery.toLowerCase());
+            bookmark.anatomyModel?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            bookmark.organ?.name?.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesFolder = selectedFolder === 'all' || bookmark.folder === selectedFolder;
         return matchesSearch && matchesFolder;
     });
 
-    if (isLoading) {
+    if (isLoading && !isRefreshing) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <LoadingSpinner size="lg" />
+            </div>
+        );
+    }
+
+    if (error && bookmarks.length === 0) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <FiAlertCircle className="w-16 h-16 mx-auto text-red-500 mb-4" />
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                        {error}
+                    </h3>
+                    <button
+                        onClick={loadBookmarks}
+                        className="btn-primary mt-4 flex items-center gap-2 mx-auto"
+                    >
+                        <FiRefreshCw className="w-4 h-4" />
+                        Try Again
+                    </button>
+                </div>
             </div>
         );
     }
@@ -100,8 +135,8 @@ const Bookmarks = () => {
                                     key={folder}
                                     onClick={() => setSelectedFolder(folder)}
                                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${selectedFolder === folder
-                                            ? 'bg-primary-500 text-white'
-                                            : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+                                        ? 'bg-primary-500 text-white'
+                                        : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
                                         }`}
                                 >
                                     <FiFolder className="w-4 h-4" />

@@ -19,6 +19,7 @@ import noteRoutes from './routes/notes.js';
 import activityRoutes from './routes/activity.js';
 import adminRoutes from './routes/admin.js';
 import moduleRoutes from './routes/modules.js';
+import notificationRoutes from './routes/notifications.js';
 
 dotenv.config();
 
@@ -63,6 +64,7 @@ app.use('/api/notes', noteRoutes);
 app.use('/api/activity', activityRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/modules', moduleRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
